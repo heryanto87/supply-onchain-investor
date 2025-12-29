@@ -1,0 +1,43 @@
+model SignatureRequest {
+  id String @id @default(cuid())
+
+  type   SignatureRequestType
+  status SignatureRequestStatus @default(PENDING)
+
+  requiredSignatures Int @default(2)
+
+  createdByUserId String
+  vaultId         String?
+
+  payload   Json?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  expiresAt DateTime?
+
+  createdBy  User        @relation("SignatureRequestCreatedBy", fields: [createdByUserId], references: [id], onDelete: Restrict)
+  vault      Vault?      @relation(fields: [vaultId], references: [id], onDelete: SetNull)
+  signatures Signature[]
+
+  @@index([status])
+  @@index([type])
+  @@index([createdByUserId])
+  @@index([vaultId])
+}
+
+model Signature {
+  id String @id @default(cuid())
+
+  requestId    String
+  signerUserId String
+  signerRole   UserRole
+
+  signature String?  @db.Text
+  signedAt  DateTime @default(now())
+
+  request SignatureRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  signer  User             @relation(fields: [signerUserId], references: [id], onDelete: Restrict)
+
+  @@unique([requestId, signerUserId])
+  @@index([signerUserId])
+  @@index([requestId])
+}

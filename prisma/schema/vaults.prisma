@@ -1,0 +1,67 @@
+model Vault {
+  id String @id @default(cuid())
+
+  name        String
+  description String? @db.Text
+
+  traderUserId String
+  status       VaultStatus @default(DRAFT)
+
+  collateralValue BigInt
+  fundTargetBps   Int    @default(7000)
+  profitShareBps  Int
+  traderCcrBps    Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  trader            User               @relation(fields: [traderUserId], references: [id], onDelete: Restrict)
+  collateral        VaultCollateral[]
+  investments       VaultInvestment[]
+  documents         VaultDocument[]
+  signatureRequests SignatureRequest[]
+
+  @@index([status])
+  @@index([traderUserId])
+}
+
+model VaultCollateral {
+  id String @id @default(cuid())
+
+  vaultId        String
+  commodityLotId String?
+  certificateId  String?
+
+  collateralValue BigInt
+  metadata        Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  vault        Vault                  @relation(fields: [vaultId], references: [id], onDelete: Cascade)
+  commodityLot CommodityLot?          @relation(fields: [commodityLotId], references: [id], onDelete: SetNull)
+  certificate  CollateralCertificate? @relation(fields: [certificateId], references: [id], onDelete: SetNull)
+
+  @@index([vaultId])
+  @@index([commodityLotId])
+  @@index([certificateId])
+}
+
+model VaultInvestment {
+  id String @id @default(cuid())
+
+  vaultId        String
+  investorUserId String
+  amount         BigInt
+  status         VaultInvestmentStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  vault    Vault @relation(fields: [vaultId], references: [id], onDelete: Restrict)
+  investor User  @relation(fields: [investorUserId], references: [id], onDelete: Restrict)
+
+  @@index([vaultId])
+  @@index([investorUserId])
+  @@index([status])
+}

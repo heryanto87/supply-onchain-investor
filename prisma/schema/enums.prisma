@@ -1,0 +1,118 @@
+enum UserRole {
+  INVESTOR
+  TRADER
+  OWNER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  DISABLED
+}
+
+enum KycStatus {
+  PENDING
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+}
+
+enum WalletCurrency {
+  IDRP
+}
+
+enum WalletTransactionType {
+  DEPOSIT
+  INVESTMENT_LOCK
+  INVESTMENT_RELEASE
+  ADJUSTMENT
+}
+
+enum WalletTransactionStatus {
+  PENDING
+  POSTED
+  FAILED
+  CANCELED
+}
+
+enum MarketplaceListingStatus {
+  DRAFT
+  ACTIVE
+  FUNDED
+  CLOSED
+  CANCELED
+}
+
+enum MarketplaceInvestmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELED
+}
+
+enum VaultStatus {
+  DRAFT
+  ACTIVE
+  FUNDED
+  CLOSED
+  CANCELED
+}
+
+enum VaultInvestmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELED
+}
+
+enum CommodityType {
+  COFFEE
+}
+
+enum CertificateType {
+  SRG
+  CMA
+}
+
+enum DocumentKind {
+  KYC_ID
+  KYC_SELFIE
+  SRG_CERTIFICATE
+  CMA_CONTRACT
+  WAREHOUSE_RECEIPT
+  LISTING_TERMS
+  VAULT_TERMS
+  OTHER
+}
+
+enum TraceEventType {
+  CREATED
+  STORED
+  MOVED
+  INSPECTED
+  CERTIFIED
+  RELEASED
+  OTHER
+}
+
+enum SignatureRequestType {
+  FUND_RELEASE
+  OTHER
+}
+
+enum SignatureRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  EXPIRED
+  CANCELED
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  APPROVE
+  REJECT
+  SIGN
+  REQUEST
+  EXECUTE
+}

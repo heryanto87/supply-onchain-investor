@@ -1,0 +1,139 @@
+model Warehouse {
+  id String @id @default(cuid())
+
+  name       String
+  isVerified Boolean @default(false)
+  wmsSystem  String?
+  metadata   Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  commodityLots CommodityLot[]
+  listings      MarketplaceListing[]
+  documents     WarehouseDocument[]
+}
+
+model CommodityLot {
+  id String @id @default(cuid())
+
+  commodityType CommodityType @default(COFFEE)
+
+  coffeeType   String?
+  coffeeGrade  String?
+  coffeeOrigin String?
+  weightGrams  BigInt
+
+  ownerUserId String
+  warehouseId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner     User      @relation("OwnerCommodityLots", fields: [ownerUserId], references: [id], onDelete: Restrict)
+  warehouse Warehouse @relation(fields: [warehouseId], references: [id], onDelete: Restrict)
+
+  certificates     CollateralCertificate[]
+  traceEvents      TraceEvent[]
+  listing          MarketplaceListing?
+  documents        CommodityLotDocument[]
+  vaultCollaterals VaultCollateral[]
+
+  @@index([ownerUserId])
+  @@index([warehouseId])
+}
+
+model CollateralCertificate {
+  id String @id @default(cuid())
+
+  type              CertificateType
+  certificateNumber String
+
+  issuerName String?
+  issuedAt   DateTime?
+  expiresAt  DateTime?
+  metadata   Json?
+
+  commodityLotId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  commodityLot        CommodityLot?                   @relation(fields: [commodityLotId], references: [id], onDelete: SetNull)
+  documents           CollateralCertificateDocument[]
+  marketplaceListings MarketplaceListing[]
+  vaultCollaterals    VaultCollateral[]
+
+  @@unique([type, certificateNumber])
+  @@index([commodityLotId])
+}
+
+model TraceEvent {
+  id String @id @default(cuid())
+
+  commodityLotId String
+  type           TraceEventType
+  occurredAt     DateTime
+
+  location String?
+  metadata Json?
+
+  createdAt DateTime @default(now())
+
+  commodityLot CommodityLot @relation(fields: [commodityLotId], references: [id], onDelete: Cascade)
+
+  @@index([commodityLotId])
+  @@index([type])
+  @@index([occurredAt])
+}
+
+model MarketplaceListing {
+  id String @id @default(cuid())
+
+  commodityLotId String @unique
+  ownerUserId    String
+  warehouseId    String
+
+  status MarketplaceListingStatus @default(DRAFT)
+
+  collateralValue BigInt
+  loanTargetBps   Int    @default(7000)
+  profitShareBps  Int
+  ccrBps          Int?
+
+  primaryCertificateId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  commodityLot CommodityLot                 @relation(fields: [commodityLotId], references: [id], onDelete: Restrict)
+  owner        User                         @relation(fields: [ownerUserId], references: [id], onDelete: Restrict)
+  warehouse    Warehouse                    @relation(fields: [warehouseId], references: [id], onDelete: Restrict)
+  investments  MarketplaceInvestment[]
+  documents    MarketplaceListingDocument[]
+
+  primaryCertificate CollateralCertificate? @relation(fields: [primaryCertificateId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([ownerUserId])
+  @@index([warehouseId])
+}
+
+model MarketplaceInvestment {
+  id String @id @default(cuid())
+
+  listingId      String
+  investorUserId String
+  amount         BigInt
+  status         MarketplaceInvestmentStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  listing  MarketplaceListing @relation(fields: [listingId], references: [id], onDelete: Restrict)
+  investor User               @relation(fields: [investorUserId], references: [id], onDelete: Restrict)
+
+  @@index([listingId])
+  @@index([investorUserId])
+  @@index([status])
+}

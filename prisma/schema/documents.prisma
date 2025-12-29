@@ -1,0 +1,116 @@
+model Document {
+  id   String       @id @default(cuid())
+  kind DocumentKind
+
+  storageKey String
+  url        String?
+  mimeType   String?
+  sizeBytes  Int?
+  checksum   String?
+  metadata   Json?
+
+  uploadedByUserId String?
+  uploadedAt       DateTime @default(now())
+
+  uploadedBy User? @relation(fields: [uploadedByUserId], references: [id], onDelete: SetNull)
+
+  kycApplications        KycApplicationDocument[]
+  commodityLots          CommodityLotDocument[]
+  collateralCertificates CollateralCertificateDocument[]
+  marketplaceListings    MarketplaceListingDocument[]
+  vaults                 VaultDocument[]
+  warehouses             WarehouseDocument[]
+
+  @@index([kind])
+  @@index([uploadedByUserId])
+}
+
+model KycApplicationDocument {
+  id String @id @default(cuid())
+
+  kycApplicationId String
+  documentId       String
+
+  createdAt DateTime @default(now())
+
+  kycApplication KycApplication @relation(fields: [kycApplicationId], references: [id], onDelete: Cascade)
+  document       Document       @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([kycApplicationId, documentId])
+  @@index([documentId])
+}
+
+model CommodityLotDocument {
+  id String @id @default(cuid())
+
+  commodityLotId String
+  documentId     String
+
+  createdAt DateTime @default(now())
+
+  commodityLot CommodityLot @relation(fields: [commodityLotId], references: [id], onDelete: Cascade)
+  document     Document     @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([commodityLotId, documentId])
+  @@index([documentId])
+}
+
+model CollateralCertificateDocument {
+  id String @id @default(cuid())
+
+  collateralCertificateId String
+  documentId              String
+
+  createdAt DateTime @default(now())
+
+  collateralCertificate CollateralCertificate @relation(fields: [collateralCertificateId], references: [id], onDelete: Cascade)
+  document              Document              @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([collateralCertificateId, documentId])
+  @@index([documentId])
+}
+
+model MarketplaceListingDocument {
+  id String @id @default(cuid())
+
+  marketplaceListingId String
+  documentId           String
+
+  createdAt DateTime @default(now())
+
+  marketplaceListing MarketplaceListing @relation(fields: [marketplaceListingId], references: [id], onDelete: Cascade)
+  document           Document           @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([marketplaceListingId, documentId])
+  @@index([documentId])
+}
+
+model VaultDocument {
+  id String @id @default(cuid())
+
+  vaultId    String
+  documentId String
+
+  createdAt DateTime @default(now())
+
+  vault    Vault    @relation(fields: [vaultId], references: [id], onDelete: Cascade)
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([vaultId, documentId])
+  @@index([documentId])
+}
+
+model WarehouseDocument {
+  id String @id @default(cuid())
+
+  warehouseId String
+  documentId  String
+
+  createdAt DateTime @default(now())
+
+  warehouse Warehouse @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
+  document  Document  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([warehouseId, documentId])
+  @@index([documentId])
+}
