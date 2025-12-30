@@ -1,64 +1,71 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --color-primary: #051803;
+  --color-primary-light: #0F280B;
+  --color-accent: #81B921;
+  --color-accent-dark: #6fa01b;
+  --color-neutral-black: #0A0A0A;
+  --color-neutral-white: #FFFFFF;
 }
 
 :root {
   /* Base surfaces */
-  --background: oklch(0.995 0.002 140);
-  --foreground: oklch(0.180 0.015 145);
+  --background: #FFFFFF;
+  --foreground: #0A0A0A;
 
-  --card: oklch(0.985 0.004 140);
-  --card-foreground: oklch(0.180 0.015 145);
+  --card: #FFFFFF;
+  --card-foreground: #0A0A0A;
 
-  --popover: oklch(1.000 0 0);
-  --popover-foreground: oklch(0.180 0.015 145);
+  --popover: #FFFFFF;
+  --popover-foreground: #0A0A0A;
 
-  /* Brand / primary (APLX green) */
-  --primary: oklch(0.720 0.190 145);
-  --primary-foreground: oklch(0.990 0.005 140);
+  /* Brand / primary (APLX Dark Green) */
+  --primary: #051803;
+  --primary-foreground: #FFFFFF;
 
-  /* Secondary (dark neutral) */
-  --secondary: oklch(0.230 0.010 145);
-  --secondary-foreground: oklch(0.990 0.005 140);
+  /* Secondary */
+  --secondary: #F5F5F5;
+  --secondary-foreground: #0A0A0A;
 
   /* Muted UI */
-  --muted: oklch(0.940 0.006 145);
-  --muted-foreground: oklch(0.420 0.010 145);
+  --muted: #F5F5F5;
+  --muted-foreground: #737373;
 
-  /* Accent (soft green highlight) */
-  --accent: oklch(0.880 0.090 145);
-  --accent-foreground: oklch(0.230 0.010 145);
+  /* Accent (Neon Green) */
+  --accent: #81B921;
+  --accent-foreground: #FFFFFF;
 
   /* Status */
   --destructive: oklch(0.620 0.230 25);
   --destructive-foreground: oklch(1.000 0 0);
 
   /* Borders & inputs */
-  --border: oklch(0.915 0.006 145);
-  --input: oklch(0.965 0.004 145);
-  --ring: oklch(0.720 0.190 145);
+  --border: #E5E5E5;
+  --input: #E5E5E5;
+  --ring: #051803;
 
   /* Charts (green-first palette) */
-  --chart-1: oklch(0.720 0.190 145);
-  --chart-2: oklch(0.680 0.160 155);
-  --chart-3: oklch(0.640 0.140 135);
-  --chart-4: oklch(0.760 0.120 165);
-  --chart-5: oklch(0.600 0.200 120);
+  --chart-1: #051803;
+  --chart-2: #81B921;
+  --chart-3: #0F280B;
+  --chart-4: #6fa01b;
+  --chart-5: #737373;
 
   /* Sidebar */
-  --sidebar: oklch(0.985 0.004 140);
-  --sidebar-foreground: oklch(0.180 0.015 145);
-  --sidebar-primary: oklch(0.720 0.190 145);
-  --sidebar-primary-foreground: oklch(1.000 0 0);
-  --sidebar-accent: oklch(0.880 0.090 145);
-  --sidebar-accent-foreground: oklch(0.230 0.010 145);
-  --sidebar-border: oklch(0.915 0.006 145);
-  --sidebar-ring: oklch(0.720 0.190 145);
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #0A0A0A;
+  --sidebar-primary: #051803;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F5F5F5;
+  --sidebar-accent-foreground: #0A0A0A;
+  --sidebar-border: #E5E5E5;
+  --sidebar-ring: #051803;
 
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 
   /* Shadows (very subtle, card-focused) */
   --shadow-color: rgba(46, 204, 113, 0.18);

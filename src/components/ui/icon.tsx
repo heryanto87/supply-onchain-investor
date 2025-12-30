@@ -8,7 +8,11 @@ export type IconProps = Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> 
 
 export function Icon({ name, className, ...props }: IconProps) {
   return (
-    <span className={cn("material-symbols-outlined", className)} {...props}>
+    <span 
+      className={cn("material-symbols-outlined", className)} 
+      aria-hidden="true"
+      {...props}
+    >
       {name}
     </span>
   );

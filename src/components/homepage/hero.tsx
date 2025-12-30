@@ -1,162 +1,79 @@
-import Image from "next/image";
 import React from "react";
-
-import { GraphChartSVG, UnderlineSVG } from "@/components/illustrations";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Icon } from "@/components/ui/icon";
-import { Section } from "@/components/ui/section";
 
 export function Hero() {
   return (
-    <Section className="relative overflow-hidden lg:h-[800px] flex items-center bg-white py-0">
-      <Image
-        src="https://images.unsplash.com/photo-1611095973763-414019e72400?q=80&w=2942&auto=format&fit=crop"
-        alt="Abstract coffee beans background texture"
-        fill
-        className="object-cover object-center mix-blend-multiply opacity-10"
-        priority
-      />
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-white via-white/95 to-white/40"></div>
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-10"></div>
-      <Container className="relative z-10 w-full py-20 lg:py-0">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 flex flex-col justify-center">
-            <div className="inline-flex items-center w-fit rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary mb-8 backdrop-blur-sm">
-              <span className="mr-2 h-2 w-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(97,186,33,0.8)]"></span>
-              Platform Live v2.0
+    <section className="relative pt-28 pb-16 lg:pt-40 lg:pb-32 overflow-hidden">
+      <Container className="relative z-10">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
+          <div className="max-w-3xl lg:w-1/2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 border border-neutral-200 text-neutral-600 text-xs font-bold mb-6">
+              <Icon name="verified_user" className="text-base text-accent" />
+              Powered by Gudangin WMS
             </div>
-            <h1 className="text-5xl font-black tracking-tight text-slate-900 sm:text-7xl lg:text-7xl leading-[1.1] mb-6">
-              Invest in the <br />
-              <span className="text-primary relative inline-block">
-                Future of Coffee
-                <UnderlineSVG className="absolute -bottom-2 left-0 w-full h-3 text-primary/30" />
-              </span>
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-primary">
+              Real Assets.<br />
+              <span className="text-neutral-400">Stable Returns.</span>
             </h1>
-            <p className="mt-4 text-xl leading-8 text-slate-600 max-w-2xl font-light">
-              Unlock yields from real-world commodities. Secure, asset-backed
-              lending and trading strategies powered by the{" "}
-              <strong className="text-slate-900 font-semibold">
-                IDRP stablecoin
-              </strong>
-              .
+            <p className="text-base sm:text-lg text-neutral-500 mb-8 sm:mb-10 max-w-lg leading-relaxed">
+              Invest in commodity-backed coffee assets using SRG and CMA collateral.
+              Secure, transparent, and settled in IDRP stablecoin.
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <Button
-                size="lg"
-                className="font-bold hover:shadow-lg transition-all shadow-[0_0_20px_rgba(97,186,33,0.3)] group"
-              >
-                Start Investing
-                <Icon
-                  name="arrow_forward"
-                  className="group-hover:translate-x-1 transition-transform"
-                />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="font-medium shadow-sm"
-              >
-                <Icon name="play_circle" className="text-primary" />
-                How it works
-              </Button>
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <button className="flex items-center justify-center h-12 px-8 rounded-lg bg-accent text-white text-base font-bold hover:bg-accent-dark transition-all shadow-md shadow-accent/20 w-full sm:w-auto">
+                Explore Vaults
+                <Icon name="arrow_forward" className="ml-2 text-sm" />
+              </button>
+              <button className="flex items-center justify-center h-12 px-8 rounded-lg bg-neutral-50 border border-neutral-200 text-neutral-400 text-base font-bold cursor-not-allowed w-full sm:w-auto" disabled>
+                Marketplace (Soon)
+              </button>
             </div>
-            <div className="mt-12 flex items-center gap-8 border-t border-gray-200 pt-8">
-              <div>
-                <p className="text-3xl font-bold text-slate-900">12.5%</p>
-                <p className="text-sm text-gray-500">Avg. APY</p>
+            <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 text-neutral-600 text-sm font-semibold">
+              <div className="flex items-center gap-2">
+                <Icon name="gavel" className="text-primary" />
+                Regulated SRG
               </div>
-              <div className="w-px h-10 bg-gray-200"></div>
-              <div>
-                <p className="text-3xl font-bold text-slate-900">$42.5M</p>
-                <p className="text-sm text-gray-500">Assets Locked</p>
+              <div className="flex items-center gap-2">
+                <Icon name="warehouse" className="text-primary" />
+                Physically Audited
               </div>
-              <div className="w-px h-10 bg-gray-200"></div>
-              <div className="flex -space-x-3">
-                <div className="w-10 h-10 rounded-full border-2 border-white bg-gray-300 flex items-center justify-center overflow-hidden">
-                  <Icon name="person" className="text-gray-500 text-lg" />
-                </div>
-                <div className="w-10 h-10 rounded-full border-2 border-white bg-gray-400 flex items-center justify-center overflow-hidden">
-                  <Icon name="person" className="text-gray-600 text-lg" />
-                </div>
-                <div className="w-10 h-10 rounded-full border-2 border-white bg-gray-500 flex items-center justify-center text-xs font-bold text-white">
-                  +2k
-                </div>
+              <div className="flex items-center gap-2">
+                <Icon name="lock" className="text-primary" />
+                Insured Custody
               </div>
             </div>
           </div>
-          <div className="lg:col-span-5 relative mt-12 lg:mt-0">
-            <div className="absolute -top-20 -right-20 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
-            <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none"></div>
-            <div className="relative z-10 transform lg:rotate-y-[-12deg] lg:rotate-x-[5deg] transition-transform duration-500 hover:rotate-0 perspective-1000">
-              <div className="relative rounded-2xl bg-white/80 backdrop-blur-xl border border-gray-200 p-6 shadow-2xl">
-                <div className="flex justify-between items-center mb-6">
+          <div className="lg:w-1/2 relative">
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-soft bg-neutral-100">
+              <Image
+                alt="Coffee drying process"
+                className="object-cover opacity-90"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRUN8E-7hZUPXK2yVRfba0sOUZA2FWrlDbJFag3Pvhasxx9gbCPvtSnWHfnSnJubsn5zouW04K7lptY6uXtkWIw4QEjy9HusVcp2tVDEl9BhMAKMzqOaohhsEvSh9Qhj8Itgf9eFFSViAOP6HO-bwKvJxHmbPs5UhpimBfmu3ySpQCLS8tZDDR70piB4o07o1j4E_wAay16Wz4qqB0lO0miDJrIeWihMIoYUkjFe0HivF_P2Vxr2z4UWphSvbIubt8iNrZJbU_Ppcv"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent mix-blend-multiply z-10"></div>
+              <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-white/20 z-20">
+                <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900">
-                      Portfolio Overview
-                    </h3>
-                    <p className="text-xs text-slate-500">
-                      Real-time asset performance
-                    </p>
+                    <p className="text-xs text-neutral-500 font-bold uppercase tracking-wider mb-1">Current Yield</p>
+                    <p className="text-2xl font-bold text-primary">12.4% <span className="text-sm font-normal text-neutral-400">APY</span></p>
                   </div>
-                  <div className="flex gap-2">
-                    <span className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50"></span>
-                    <span className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50"></span>
-                    <span className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></span>
+                  <div className="h-10 w-px bg-neutral-200 mx-4"></div>
+                  <div>
+                    <p className="text-xs text-neutral-500 font-bold uppercase tracking-wider mb-1">Total Value Locked</p>
+                    <p className="text-2xl font-bold text-primary">IDRP 42.5B</p>
                   </div>
-                </div>
-                <div className="h-48 w-full bg-gradient-to-b from-primary/5 to-transparent rounded-lg border border-primary/10 relative overflow-hidden mb-6 group">
-                  <GraphChartSVG className="absolute bottom-0 left-0 w-full h-full" />
-                  <div className="absolute top-[20%] right-[10%] w-3 h-3 bg-white rounded-full shadow-[0_0_10px_#61ba21] z-10 border border-primary"></div>
-                  <div className="absolute top-[10%] right-[15%] bg-white border border-gray-200 px-3 py-1 rounded text-xs text-primary font-bold shadow-lg">
-                    +14.2%
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-slate-50 rounded-xl p-4 border border-gray-200">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Icon name="paid" className="text-primary text-lg" />
-                      <span className="text-xs text-slate-500">
-                        Total Yield
-                      </span>
-                    </div>
-                    <p className="text-xl font-bold text-slate-900">
-                      4,285 IDRP
-                    </p>
-                  </div>
-                  <div className="bg-slate-50 rounded-xl p-4 border border-gray-200">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Icon name="security" className="text-blue-500 text-lg" />
-                      <span className="text-xs text-slate-500">Coverage</span>
-                    </div>
-                    <p className="text-xl font-bold text-slate-900">
-                      100% SRG
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-4 bg-slate-50 rounded-xl p-3 border border-gray-200 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-white shadow-sm border border-gray-100 flex items-center justify-center">
-                      <Icon name="inventory_2" className="text-slate-400" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-slate-900">
-                        Arabica Spot Vault
-                      </p>
-                      <p className="text-xs text-slate-500">
-                        Auto-compounding
-                      </p>
-                    </div>
-                  </div>
-                  <span className="text-primary font-bold text-sm">
-                    Active
-                  </span>
                 </div>
               </div>
             </div>
+            <div className="absolute -z-10 -top-10 -right-10 w-full h-full bg-accent/5 rounded-3xl"></div>
           </div>
         </div>
       </Container>
-    </Section>
+    </section>
   );
 }
