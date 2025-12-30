@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import { Icon } from "@/components/ui/icon";
 
 export function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const isLoginPage = pathname === "/login";
 
   return (
@@ -35,7 +36,7 @@ export function Navbar() {
         </div>
 
         <nav className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-10 md:flex">
-          {!isLoginPage ? (
+          {!isLoginPage && (
             <>
               <Link
                 className="relative py-2 text-base text-gray-500 transition-colors hover:text-slate-900 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:rounded-t-sm after:bg-primary after:content-[''] after:transition-all after:duration-300 hover:after:w-full"
@@ -56,26 +57,25 @@ export function Navbar() {
                 Vaults
               </Link>
             </>
-          ) : (
-            <Link
-              className="relative py-2 text-base text-gray-500 transition-colors hover:text-slate-900 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:rounded-t-sm after:bg-primary after:content-[''] after:transition-all after:duration-300 hover:after:w-full"
-              href="/homepage"
-            >
-              Back to Home
-            </Link>
           )}
         </nav>
 
         <div className="flex items-center gap-4">
           {!isLoginPage ? (
-            <Button className="hidden px-6 shadow-lg shadow-primary/30 md:flex">
+            <Button
+              className="hidden px-6 shadow-lg shadow-primary/30 md:flex"
+              onClick={() => router.push("/login")}
+            >
               <Icon name="arrow_forward" className="text-xl" />
               Continue
             </Button>
           ) : (
-            <Button className="hidden px-6 shadow-lg shadow-primary/30 md:flex">
-              Sign Up
-            </Button>
+            <Link
+              className="relative py-2 text-base text-gray-500 transition-colors hover:text-slate-900 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:rounded-t-sm after:bg-primary after:content-[''] after:transition-all after:duration-300 hover:after:w-full"
+              href="#"
+            >
+              Help
+            </Link>
           )}
 
           <Button

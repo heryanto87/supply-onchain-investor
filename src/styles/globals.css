@@ -58,11 +58,6 @@
   --sidebar-border: oklch(0.915 0.006 145);
   --sidebar-ring: oklch(0.720 0.190 145);
 
-  /* Typography & layout */
-  --font-sans: Inter, ui-sans-serif, system-ui;
-  --font-serif: Georgia, serif;
-  --font-mono: JetBrains Mono, monospace;
-
   --radius: 1.25rem;
 
   /* Shadows (very subtle, card-focused) */
