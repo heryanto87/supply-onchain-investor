@@ -10,6 +10,10 @@
   --color-accent-dark: #6fa01b;
   --color-neutral-black: #0A0A0A;
   --color-neutral-white: #FFFFFF;
+  --color-info: #3B82F6;
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
 }
 
 :root {
