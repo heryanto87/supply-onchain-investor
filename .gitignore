@@ -49,3 +49,7 @@ yarn-error.log*
 
 # trae files
 .trae/
+
+# cursor files
+.cursor/
+.cursor/rules/
