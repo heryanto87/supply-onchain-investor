@@ -1,9 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 import { Navbar } from "@/components/navbar";
 import { Icon } from "@/components/ui/icon";
+import { auth } from "@/server/auth";
 import { LoginForm } from "./login-form";
 
 export const metadata: Metadata = {
@@ -11,7 +13,22 @@ export const metadata: Metadata = {
   description: "Secure login to your APLX custodial wallet and investment dashboard.",
 };
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const session = await auth();
+
+  if (session?.user) {
+    switch (session.user.role) {
+      case "INVESTOR":
+        redirect("/investor/dashboard");
+      case "TRADER":
+        redirect("/trader/dashboard");
+      case "ADMIN":
+        redirect("/admin/dashboard");
+      default:
+        redirect("/investor/dashboard");
+    }
+  }
+
   return (
     <div className="bg-white font-sans text-slate-900 overflow-x-hidden antialiased flex flex-col min-h-screen pt-20">
       <Navbar />
