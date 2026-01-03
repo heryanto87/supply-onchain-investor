@@ -2,19 +2,36 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import React from "react";
 
 import { Icon } from "@/components/ui/icon";
+import { cn } from "@/lib/cn";
 
 export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
+  const { data: session } = useSession();
   const isLoginPage = pathname === "/login";
+  const isHomepage = pathname === "/homepage";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
+  const userFirstName = session?.user?.name?.split(" ")[0];
+
+  const handleCtaClick = () => {
+    if (session) {
+      router.push("/investor/dashboard");
+      return;
+    }
+    router.push(isLoginPage ? "#" : "/login");
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-neutral-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className={cn(
+        "mx-auto px-4 sm:px-6 lg:px-8",
+        isHomepage ? "max-w-7xl" : "max-w-[1600px]"
+      )}>
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center gap-2">
             <Link href="/homepage" className="flex items-center gap-2">
@@ -24,7 +41,7 @@ export function Navbar() {
               <span className="text-xl font-bold tracking-tight text-primary">APLX</span>
             </Link>
           </div>
-          
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-10">
             <Link className="text-sm font-semibold text-neutral-500 hover:text-primary transition-colors" href="#">Vault</Link>
@@ -44,15 +61,24 @@ export function Navbar() {
                 <span className="text-xs font-semibold text-neutral-800">IDRP: 1.00 IDR</span>
               </div>
             )}
-            <button 
-              className="hidden sm:flex items-center justify-center px-5 h-10 rounded-lg bg-primary hover:bg-neutral-800 text-white font-bold text-sm transition-all shadow-sm"
-              onClick={() => router.push(isLoginPage ? "#" : "/login")}
-            >
-              {isLoginPage ? "Help" : "Connect Wallet"}
-            </button>
-            
+            {session?.user ? (
+              <Link
+                href="/investor/dashboard"
+                className="hidden sm:block text-sm font-bold text-neutral-700 hover:text-primary transition-colors"
+              >
+                {userFirstName}
+              </Link>
+            ) : (
+              <button
+                className="hidden sm:flex items-center justify-center px-5 h-10 rounded-lg bg-primary hover:bg-neutral-800 text-white font-bold text-sm transition-all shadow-sm"
+                onClick={handleCtaClick}
+              >
+                {isLoginPage ? "Help" : "Continue"}
+              </button>
+            )}
+
             {/* Mobile Menu Button */}
-            <button 
+            <button
               className="md:hidden p-2 text-neutral-600 hover:text-primary transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
@@ -82,15 +108,25 @@ export function Navbar() {
                 </div>
               </div>
             )}
-            <button 
-              className="w-full py-3 rounded-lg bg-primary text-white font-bold text-base shadow-sm"
-              onClick={() => {
-                router.push(isLoginPage ? "#" : "/login");
-                setIsMobileMenuOpen(false);
-              }}
-            >
-              {isLoginPage ? "Help" : "Connect Wallet"}
-            </button>
+            {session?.user ? (
+              <Link
+                href="/investor/dashboard"
+                className="block w-full py-3 text-center text-lg font-bold text-neutral-700 hover:text-primary"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {userFirstName}
+              </Link>
+            ) : (
+              <button
+                className="w-full py-3 rounded-lg bg-primary text-white font-bold text-base shadow-sm"
+                onClick={() => {
+                  handleCtaClick();
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                {isLoginPage ? "Help" : "Continue"}
+              </button>
+            )}
           </nav>
         </div>
       )}

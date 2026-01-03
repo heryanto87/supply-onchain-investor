@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { type Metadata } from "next";
-import { NavbarInvestor } from "@/components/navbar-investor";
+import { Navbar } from "@/components/navbar";
 import { SidebarInvestor } from "@/components/sidebar-investor";
 
 export const metadata: Metadata = {
@@ -15,9 +15,9 @@ export default function InvestorLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="bg-white text-neutral-900 min-h-screen flex flex-col antialiased selection:bg-accent selection:text-white">
+        <div className="bg-white text-neutral-900 min-h-screen flex flex-col antialiased selection:bg-accent selection:text-white pt-20">
             {/* Header */}
-            <NavbarInvestor />
+            <Navbar />
 
             {/* Main Layout */}
             <div className="flex flex-1 w-full max-w-[1600px] mx-auto">
