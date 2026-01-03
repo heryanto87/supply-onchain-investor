@@ -35,7 +35,7 @@ export function SidebarInvestor() {
   };
 
   return (
-    <aside className="hidden lg:flex flex-col w-64 border-r border-neutral-100 bg-white sticky top-16 h-[calc(100vh-4rem)] p-6 gap-2 shrink-0">
+    <aside className="hidden lg:flex flex-col w-64 border-r border-neutral-100 bg-white sticky top-20 h-[calc(100vh-5rem)] p-6 gap-2 shrink-0">
       <p className="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-2 px-3">
         Menu
       </p>

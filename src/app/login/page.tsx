@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="bg-white font-sans text-slate-900 overflow-x-hidden antialiased flex flex-col min-h-screen">
+    <div className="bg-white font-sans text-slate-900 overflow-x-hidden antialiased flex flex-col min-h-screen pt-20">
       <Navbar />
       <div className="flex flex-col lg:flex-row flex-1 w-full">
         {/* Left Panel - Visuals */}
